@@ -21,10 +21,12 @@
                 <th>Description meal</th>
                 <th>Calories</th>
                 <th>Excess</th>
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
-        <c:forEach var="meal" items="${listMeal}">
+        <c:forEach var="meal" items="${listMeals}">
             <tr style="${meal.excess ? 'background-color: crimson' : 'background-color: forestgreen'}">
                 <td>
                     <javatime:format value="${meal.dateTime}" style="MS" />
@@ -32,9 +34,12 @@
                 <td><c:out value="${meal.description}"/></td>
                 <td><c:out value="${meal.calories}"/></td>
                 <td><c:out value="${meal.excess}"/></td>
+                <td><a href="meals?action=edit&mealId=<c:out value="${meal.id}"/>">Edit</a></td>
+                <td><a href="meals?action=delete&mealId=<c:out value="${meal.id}"/>">Delete</a></td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
+    <p><a href="meals?action=insert">Add meal</a> </p>
 </body>
 </html>

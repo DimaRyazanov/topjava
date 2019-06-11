@@ -17,8 +17,28 @@ public class FakeMealServiceImpl implements MealService {
         Map<LocalDate, Integer> summingCaloriesPerDate = mealRepository.getAllMeals().stream().collect(Collectors.groupingBy(Meal::getDate, Collectors.summingInt(Meal::getCalories)));
 
         return mealRepository.getAllMeals().stream()
-                    .map(x -> new MealTo(x.getDateTime(), x.getDescription(), x.getCalories(),
+                    .map(x -> new MealTo(x.getId(), x.getDateTime(), x.getDescription(), x.getCalories(),
                             summingCaloriesPerDate.get(x.getDate()) > 2000))
                     .collect(Collectors.toList());
+    }
+
+    @Override
+    public void addMeal(Meal meal) {
+        mealRepository.addMeal(meal);
+    }
+
+    @Override
+    public Meal getMealById(int id) {
+        return mealRepository.getMealById(id);
+    }
+
+    @Override
+    public void updateMeal(Meal meal) {
+        mealRepository.updateMeal(meal);
+    }
+
+    @Override
+    public void delete(int id) {
+        mealRepository.delete(id);
     }
 }
