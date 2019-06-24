@@ -18,9 +18,33 @@
 </head>
 <body>
 <section>
+    <h2>Meals</h2>
+    <br/>
+    <form id="filter" action="meals" method="get" >
+        <input type="hidden" name="action"  value="filter">
+        <div>
+            <label for="startDate">От даты</label>
+            <input type="date" name="startDate" id="startDate" value="${startDate}"/>
+        </div>
+        <div>
+            <label for="endDate">До даты</label>
+            <input type="date" name="endDate" id="endDate"/>
+        </div>
+        <div>
+            <label for="startTime">От времени</label>
+            <input type="time" name="startTime" id="startTime"/>
+        </div>
+        <div>
+            <label for="endTime">До времени</label>
+            <input type="time" name="endTime" id="endTime"/>
+        </div>
+        <div>
+            <button type="submit">Фильтровать</button>
+        </div>
+    </form>
     <h3><a href="index.html">Home</a></h3>
     <hr/>
-    <h2>Meals</h2>
+
     <a href="meals?action=create">Add Meal</a>
     <br><br>
     <table border="1" cellpadding="8" cellspacing="0">

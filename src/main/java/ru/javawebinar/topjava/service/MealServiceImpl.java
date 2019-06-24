@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.repository.MealRepository;
 import ru.javawebinar.topjava.to.MealTo;
+import ru.javawebinar.topjava.util.DateTimeUtil;
 import ru.javawebinar.topjava.util.MealsUtil;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static ru.javawebinar.topjava.util.ValidationUtil.checkNotFoundWithId;
 
@@ -29,7 +31,10 @@ public class MealServiceImpl implements MealService {
 
     @Override
     public List<MealTo> getFiltered(int userId, LocalDate startDate, LocalTime startTime, LocalDate endDate, LocalTime endTime) {
-        List<MealTo> mealWithExcess = MealsUtil.getWithExcess(repository.getFiltered(userId, startDate, startTime, endDate, endTime), MealsUtil.DEFAULT_CALORIES_PER_DAY);
+        List<MealTo> mealWithExcess = MealsUtil.getWithExcess(repository.getFiltered(userId, startDate, null, endDate, null), MealsUtil.DEFAULT_CALORIES_PER_DAY)
+                                        .stream()
+                                        .filter(mealTo -> DateTimeUtil.isBetween(mealTo.getDateTime().toLocalTime(), startTime, endTime))
+                                        .collect(Collectors.toList());
         return mealWithExcess != null ? mealWithExcess : Collections.emptyList();
     }
 

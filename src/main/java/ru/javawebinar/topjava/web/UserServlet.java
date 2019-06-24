@@ -18,4 +18,16 @@ public class UserServlet extends HttpServlet {
         log.debug("forward to users");
         request.getRequestDispatcher("/users.jsp").forward(request, response);
     }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        log.debug("choose user (mock)");
+        try {
+            int id = Integer.parseInt(request.getParameter("userId"));
+            SecurityUtil.setUserId(id);
+        }catch (NumberFormatException e){
+            System.out.println(e);
+        }
+        request.getRequestDispatcher("index.html").forward(request, response);
+    }
 }
