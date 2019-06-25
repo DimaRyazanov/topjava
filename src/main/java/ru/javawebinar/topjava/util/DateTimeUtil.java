@@ -23,8 +23,20 @@ public class DateTimeUtil {
         return adjustDateTime(localDate, MAX_DATE, LocalTime.MAX);
     }
 
+    public static LocalDateTime adjustStartDateTime(LocalDateTime localDateTime) {
+        return adjustDateTime(localDateTime, MIN_DATE, LocalTime.MIN);
+    }
+
+    public static LocalDateTime adjustEndDateTime(LocalDateTime localDateTime) {
+        return adjustDateTime(localDateTime, MAX_DATE, LocalTime.MAX);
+    }
+
     private static LocalDateTime adjustDateTime(LocalDate localDate, LocalDate defaultDate, LocalTime adjustTime) {
         return LocalDateTime.of(localDate != null ? localDate : defaultDate, adjustTime);
+    }
+
+    private static LocalDateTime adjustDateTime(LocalDateTime localDateTime, LocalDate defaultDate, LocalTime adjustTime) {
+        return LocalDateTime.of(localDateTime != null ? localDateTime.toLocalDate() : defaultDate, localDateTime != null ? localDateTime.toLocalTime() : adjustTime);
     }
 
     public static String toString(LocalDateTime ldt) {
