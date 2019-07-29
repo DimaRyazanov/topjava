@@ -1,0 +1,9 @@
+PUT http://localhost:8080/topjava/rest/meals/100005
+Content-Type: application/json
+
+{ "dateTime": "2015-05-31T09:00:00", "description": "Завтрак update", "calories": 600  }
+
+###
+GET http://localhost:8080/topjava/rest/meals/100005
+
+###

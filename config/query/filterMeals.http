@@ -1,0 +1,14 @@
+GET http://localhost:8080/topjava/rest/meals/filter?startDate=2015-05-30&startTime=13:00:00&endDate=2015-05-30&endTime=23:00:00
+Content-Type: application/json
+
+###
+
+GET http://localhost:8080/topjava/rest/meals/filter?startDate=2015-05-31&startTime=&endDate=&endTime=
+Content-Type: application/json
+
+###
+
+GET http://localhost:8080/topjava/rest/meals/filter?startDate=&startTime=&endDate=&endTime=
+Content-Type: application/json
+
+###
