@@ -34,7 +34,14 @@
                     <input class="form-control" type="time" name="endTime" id="endTime" value="${param.endTime}"
                            placeholder="<spring:message code="meal.endTime"/>">
                 </div>
-                <button type="submit" class="btn btn-primary"><spring:message code="meal.filter"/></button>
+                <button type="button" class="btn btn-secondary" onclick="clearFilter()">
+                    <span class="fa fa-close"></span>
+                    <spring:message code="meal.clear"/>
+                </button>
+                <button type="button" class="btn btn-primary" onclick="setFilter()">
+                    <span class="fa fa-check"></span>
+                    <spring:message code="meal.filter"/>
+                </button>
             </div>
         </form>
         <hr>

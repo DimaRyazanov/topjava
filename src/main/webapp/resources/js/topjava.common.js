@@ -33,7 +33,7 @@ function deleteRow(id) {
 }
 
 function updateTable() {
-    $.get(context.ajaxUrl, function (data) {
+    $.get(context.ajaxUrl + context.filterUrl, function (data) {
         context.datatableApi.clear().rows.add(data).draw();
     });
 }
@@ -76,4 +76,8 @@ function failNoty(jqXHR) {
         type: "error",
         layout: "bottomRight"
     }).show();
+}
+
+function setFilterUrl(filterUrl) {
+    context.filterUrl = filterUrl;
 }
