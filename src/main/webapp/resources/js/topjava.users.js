@@ -40,3 +40,16 @@ $(function () {
         }
     );
 });
+
+function setEnabledUser(id, enabled) {
+    if (confirm('Are you sure?')) {
+        $.ajax({
+            type: "POST",
+            url: "ajax/admin/users/enabled",
+            data: {"id": id, "enabled": enabled}
+        }).done(function () {
+            updateTable();
+            successNoty("Saved");
+        });
+    }
+}
