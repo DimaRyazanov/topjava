@@ -33,6 +33,9 @@ function deleteRow(id) {
 }
 
 function updateTable() {
+    if (context.filterUrl === undefined) {
+        context.filterUrl = "";
+    }
     $.get(context.ajaxUrl + context.filterUrl, function (data) {
         context.datatableApi.clear().rows.add(data).draw();
     });
