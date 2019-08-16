@@ -1,7 +1,13 @@
 package ru.javawebinar.topjava.web;
 
 import org.junit.jupiter.api.Test;
+import ru.javawebinar.topjava.web.json.JacksonObjectMapper;
 
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -47,5 +53,25 @@ class RootControllerTest extends AbstractControllerTest {
                 .andDo(print())
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("http://localhost/login"));
+    }
+
+    @Test
+    public void test() throws IOException {
+        final String json = "{ \"date\": \"2016-11-08 12:00\" }";
+        final JsonType instance = JacksonObjectMapper.getMapper().readValue(json, JsonType.class);
+
+        assertEquals(LocalDateTime.parse("2016-11-08 12:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm") ), instance.getDate());
+    }
+}
+
+class JsonType {
+    private LocalDateTime date;
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
     }
 }
